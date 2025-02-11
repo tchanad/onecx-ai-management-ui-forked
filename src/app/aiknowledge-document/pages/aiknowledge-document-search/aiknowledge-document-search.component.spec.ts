@@ -40,9 +40,9 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
       l({
         data: m,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        stopImmediatePropagation: () => {},
+        stopImmediatePropagation: () => { },
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        stopPropagation: () => {}
+        stopPropagation: () => { }
       })
     )
   }
