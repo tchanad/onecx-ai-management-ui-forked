@@ -41,8 +41,8 @@ describe('AIKnowledgeVectorDbSearchComponent', () => {
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => {},
-        stopPropagation: () => {}
+        stopImmediatePropagation: () => { },
+        stopPropagation: () => { }
       })
     )
   }
