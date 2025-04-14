@@ -5,6 +5,10 @@ import { addInitializeModuleGuard } from '@onecx/angular-integration-interface'
 import { startsWith } from '@onecx/angular-webcomponents'
 export const routes: Routes = [
   {
+    matcher: startsWith('aicontext'),
+    loadChildren: () => import('./aicontext/aicontext.module').then((mod) => mod.AIContextModule)
+  },
+  {
     matcher: startsWith('aiknowledge-document'),
     loadChildren: () =>
       import('./aiknowledge-document/aiknowledge-document.module').then((mod) => mod.AIKnowledgeDocumentModule)
@@ -20,4 +24,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(addInitializeModuleGuard(routes)), TranslateModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

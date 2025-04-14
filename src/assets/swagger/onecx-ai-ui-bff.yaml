@@ -3,7 +3,7 @@ info:
   title: onecx-ai-ui-bff
   version: '1.0'
 paths:
-  /AIKnowledgeVectorDb/search:
+  /aIKnowledgeVectorDb/search:
     post:
       operationId: searchAIKnowledgeVectorDbs
       tags:
@@ -26,7 +26,7 @@ paths:
           description: Bad request
         '500':
           description: Something went wrong
-  /AIKnowledgeVectorDb/{id}:
+  /aIKnowledgeVectorDb/{id}:
     get:
       x-onecx:
         permissions:
@@ -118,7 +118,7 @@ paths:
       responses:
         '204':
           description: AIKnowledgeVectorDb deleted
-  /AIKnowledgeVectorDb:
+  /aIKnowledgeVectorDb:
     post:
       operationId: createAIKnowledgeVectorDb
       tags:
@@ -266,6 +266,11 @@ paths:
       tags:
         - AIKnowledgeDocumentBffService
       description: This operation performs a create.
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -290,7 +295,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProblemDetailResponse'                
+                $ref: '#/components/schemas/ProblemDetailResponse'
+  /aIContext/search:
+    post:
+      operationId: searchAIContexts
+      tags:
+        - AIContextBffService
+      description: This operation performs a search based on provided search criteria.
+        Search for AIContext results.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIContextSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIContextSearchResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Something went wrong
 components:
   schemas:
     AIKnowledgeVectorDb:
@@ -311,9 +339,9 @@ components:
           type: string
         vdbCollection:
           type: string
-        aiContext:
+        aIContext:
           type: object
-          $ref: AIContext
+          $ref: '#/components/schemas/AIContext'
     SearchAIKnowledgeVectorDbRequest:
       type: object
       properties:
@@ -410,9 +438,9 @@ components:
           type: string
         vdbCollection:
           type: string
-        aiContext:
+        aIContext:
           type: object
-          $ref: AIContext
+          $ref: '#/components/schemas/AIContext'
     AIKnowledgeVectorDbUpdateResponse:
       type: object
       properties:
@@ -424,14 +452,45 @@ components:
           type: string
         vdbCollection:
           type: string
-        aiContext:
+        aIContext:
           type: object
-          $ref: AIContext
+          $ref: '#/components/schemas/AIContext'
     AIContext:
       type: object
       properties:
+        id:
+          type: string
         appId:
           type: string
+        name:
+          type: string
+        description:
+          type: string
+        modificationCount:
+          type: integer
+          format: int32
+        modificationUser:
+          type: string
+        creationUser:
+          type: string
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        aIKnowledgeBase:
+          $ref: '#/components/schemas/AIKnowledgeBase'
+        aIKnowledgeVectorDb:
+          $ref: '#/components/schemas/AIKnowledgeVectorDb'
+        aIKnowledgeDbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIKnowledgeDatabase'
+        aIKnowledgeDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIKnowledgeDocument'
+        provider:
+          $ref: '#/components/schemas/AIProvider'
     AIKnowledgeDocument:
       type: object
       required:
@@ -448,11 +507,42 @@ components:
         documentRefId:
           type: string
         status:
+          $ref: '#/components/schemas/AIKnowledgeDocumentStatusType'
+    AIKnowledgeDocumentCreateRequest:
+      type: object
+      required:
+        - name
+        - documentRefId
+      properties:
+        name:
           type: string
-          enum:
-            - NEW
-            - PROCESSING
-            - EMBEDDED
+        documentRefId:
+          type: string
+        status:
+          $ref: '#/components/schemas/AIKnowledgeDocumentStatusType'
+    AIKnowledgeDocumentUpdateRequest:
+      type: object
+      required:
+        - documentRefId
+        - modificationCount
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        documentRefId:
+          type: string
+        modificationCount:
+          type: integer
+          format: int32
+        status:
+          $ref: '#/components/schemas/AIKnowledgeDocumentStatusType'
+    AIKnowledgeDocumentStatusType:
+      type: string
+      enum:
+        - NEW
+        - PROCESSING
+        - EMBEDDED
     AIKnowledgeDocumentSearchRequest:
       type: object
       properties:
@@ -466,10 +556,7 @@ components:
         documentRefId:
           type: string
         status:
-          enum:
-            - NEW
-            - PROCESSING
-            - EMBEDDED
+          $ref: '#/components/schemas/AIKnowledgeDocumentStatusType'
     AIKnowledgeDocumentSearchResponse:
       type: object
       required:
@@ -483,7 +570,7 @@ components:
         totalNumberOfResults:
           type: integer
           format: int32
-          description: Total number of results on the server.    
+          description: Total number of results on the server.
     GetAIKnowledgeDocumentByIdResponse:
       type: object
       required:
@@ -498,7 +585,7 @@ components:
       properties:
         aIKnowledgeDocumentData:
           type: object
-          $ref: '#/components/schemas/AIKnowledgeDocument'
+          $ref: '#/components/schemas/AIKnowledgeDocumentCreateRequest'
     UpdateAIKnowledgeDocument:
       type: object
       required:
@@ -506,7 +593,7 @@ components:
       properties:
         aIKnowledgeDocumentData:
           type: object
-          $ref: '#/components/schemas/AIKnowledgeDocument'
+          $ref: '#/components/schemas/AIKnowledgeDocumentUpdateRequest'
     AIKnowledgeDocumentCreateResponse:
       type: object
       required:
@@ -520,11 +607,7 @@ components:
         documentRefId:
           type: string
         status:
-          type: string
-          enum:
-            - NEW
-            - PROCESSING
-            - EMBEDDED
+          $ref: '#/components/schemas/AIKnowledgeDocumentStatusType'
     AIKnowledgeDocumentUpdateResponse:
       type: object
       required:
@@ -538,8 +621,149 @@ components:
         documentRefId:
           type: string
         status:
+          $ref: '#/components/schemas/AIKnowledgeDocumentStatusType'
+    AIKnowledgeBase:
+      properties:
+        modificationCount:
+          format: int32
+          type: integer
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        creationUser:
           type: string
-          enum:
-            - NEW
-            - PROCESSING
-            - EMBEDDED          
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationUser:
+          type: string
+        id:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        appId:
+          type: string
+        contexts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIContext'
+    AIKnowledgeDatabase:
+      required:
+        - db
+        - user
+        - pwd
+      type: object
+      properties:
+        modificationCount:
+          format: int32
+          type: integer
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationUser:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        db:
+          type: string
+        user:
+          type: string
+        pwd:
+          type: string
+        tables:
+          type: array
+          items:
+            type: string
+    AIProvider:
+      required:
+        - name
+        - modelName
+        - modelVersion
+      type: object
+      properties:
+        modificationCount:
+          format: int32
+          type: integer
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationUser:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        llmUrl:
+          type: string
+        modelName:
+          type: string
+        modelVersion:
+          type: string
+        appId:
+          type: string
+        apiKey:
+          type: string
+    OffsetDateTime:
+      type: string
+      format: date-time
+      example: 2025-04-10T11:30:50-04:00
+    # AIContext:
+    #   type: object
+    #   required:
+    #     - id
+    #   properties:
+    #     modificationCount:
+    #       type: integer
+    #       format: int32
+    #     id:
+    #       type: string
+    #     # "ACTION S1: add additional properties here"
+    AIContextSearchRequest:
+      type: object
+      properties:
+        limit:
+          type: integer
+          maximum: 2500
+        name:
+          type: string
+        appId:
+          type: string
+        description:
+          type: string
+        pageNumber:
+          format: int32
+          description: The number of page.
+          default: 0
+          type: integer
+        pageSize:
+          format: int32
+          description: The size of page
+          default: 10
+          maximum: 100
+          type: integer
+    AIContextSearchResponse:
+      type: object
+      required:
+        - results
+        - totalNumberOfResults
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIContext'
+        totalNumberOfResults:
+          type: integer
+          format: int32
+          description: Total number of results on the server.

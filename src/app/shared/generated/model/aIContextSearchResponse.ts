@@ -10,11 +10,11 @@
 import { AIContext } from './aIContext';
 
 
-export interface AIKnowledgeVectorDbCreateResponse { 
-    name?: string;
-    description?: string;
-    vdb?: string;
-    vdbCollection?: string;
-    aIContext?: AIContext;
+export interface AIContextSearchResponse { 
+    results: Array<AIContext>;
+    /**
+     * Total number of results on the server.
+     */
+    totalNumberOfResults: number;
 }
 

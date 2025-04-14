@@ -10,13 +10,16 @@
 import { AIContext } from './aIContext';
 
 
-export interface AIKnowledgeVectorDb { 
+export interface AIKnowledgeBase { 
     modificationCount?: number;
-    id: string;
-    name?: string;
+    creationDate?: string;
+    creationUser?: string;
+    modificationDate?: string;
+    modificationUser?: string;
+    id?: string;
     description?: string;
-    vdb?: string;
-    vdbCollection?: string;
-    aIContext?: AIContext;
+    name?: string;
+    appId?: string;
+    contexts?: Array<AIContext>;
 }
 

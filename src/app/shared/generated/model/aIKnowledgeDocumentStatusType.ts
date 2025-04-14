@@ -7,10 +7,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { AIKnowledgeDocumentUpdateRequest } from './aIKnowledgeDocumentUpdateRequest';
 
 
-export interface UpdateAIKnowledgeDocument { 
-    aIKnowledgeDocumentData: AIKnowledgeDocumentUpdateRequest;
+export enum AIKnowledgeDocumentStatusType {
+    New = 'NEW',
+    Processing = 'PROCESSING',
+    Embedded = 'EMBEDDED'
 }
 

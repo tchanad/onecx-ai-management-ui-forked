@@ -7,9 +7,27 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { AIKnowledgeBase } from './aIKnowledgeBase';
+import { AIKnowledgeDatabase } from './aIKnowledgeDatabase';
+import { AIKnowledgeDocument } from './aIKnowledgeDocument';
+import { AIKnowledgeVectorDb } from './aIKnowledgeVectorDb';
+import { AIProvider } from './aIProvider';
 
 
 export interface AIContext { 
+    id?: string;
     appId?: string;
+    name?: string;
+    description?: string;
+    modificationCount?: number;
+    modificationUser?: string;
+    creationUser?: string;
+    creationDate?: string;
+    modificationDate?: string;
+    aIKnowledgeBase?: AIKnowledgeBase;
+    aIKnowledgeVectorDb?: AIKnowledgeVectorDb;
+    aIKnowledgeDbs?: Array<AIKnowledgeDatabase>;
+    aIKnowledgeDocuments?: Array<AIKnowledgeDocument>;
+    provider?: AIProvider;
 }
 

@@ -7,16 +7,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { AIKnowledgeDocumentStatusType } from './aIKnowledgeDocumentStatusType';
 
 
-export interface AIKnowledgeDocumentSearchRequest { 
+export interface AIContextSearchRequest { 
     limit?: number;
-    id?: string;
+    id?: number;
     name?: string;
-    documentRefId?: string;
-    status?: AIKnowledgeDocumentStatusType;
+    appId?: string;
+    description?: string;
+    /**
+     * The number of page.
+     */
+    pageNumber?: number;
+    /**
+     * The size of page
+     */
+    pageSize?: number;
 }
-
-
 

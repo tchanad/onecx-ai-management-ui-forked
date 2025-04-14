@@ -3,7 +3,7 @@ import { DialogButtonClicked, DialogPrimaryButtonDisabled, DialogResult } from '
 
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { map } from 'rxjs'
-import { AIKnowledgeDocument, AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
+import { AIKnowledgeDocument, AIKnowledgeDocumentStatusType } from 'src/app/shared/generated'
 
 import { AIKnowledgeDocumentCreateUpdateViewModel } from './aiknowledge-document-create-update.viewmodel'
 
@@ -26,7 +26,7 @@ export class AIKnowledgeDocumentCreateUpdateComponent
 
   primaryButtonEnabled = new EventEmitter<boolean>()
   dialogResult: AIKnowledgeDocument | undefined = undefined
-  statusValues = Object.values(AIKnowledgeDocumentStatusEnum)
+  statusValues = Object.values(AIKnowledgeDocumentStatusType)
 
   constructor() {
     this.formGroup = new FormGroup({
@@ -43,10 +43,16 @@ export class AIKnowledgeDocumentCreateUpdateComponent
   }
 
   ocxDialogButtonClicked() {
+    console.log('[ONECX-AI-UI] ocxDialogButtonCLicked (Enter): ', this.formGroup.value)
+    console.log("[ONECX-AI-UI] EditItem 1: ", this.vm.itemToEdit)
+    // new created document should have this value per default
+    // this.formGroup.value.status = AIKnowledgeDocumentStatusType.New
     this.dialogResult = {
       ...this.vm.itemToEdit,
       ...this.formGroup.value
     }
+    console.log('[ONECX-AI-UI] ocxDialogButtonCLicked (Exit): ', this.formGroup.value)
+    console.log("[ONECX-AI-UI] EditItem 1: ", this.vm.itemToEdit)
   }
 
   ngOnInit() {

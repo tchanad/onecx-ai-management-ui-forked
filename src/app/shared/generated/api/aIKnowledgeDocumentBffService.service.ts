@@ -107,15 +107,22 @@ export class AIKnowledgeDocumentBffService {
     /**
      * This operation performs a create.
      * @param createAIKnowledgeDocument 
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<AIKnowledgeDocumentCreateResponse>;
-    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<AIKnowledgeDocumentCreateResponse>>;
-    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<AIKnowledgeDocumentCreateResponse>>;
-    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, id?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<AIKnowledgeDocumentCreateResponse>;
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, id?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<AIKnowledgeDocumentCreateResponse>>;
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, id?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<AIKnowledgeDocumentCreateResponse>>;
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, id?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (createAIKnowledgeDocument === null || createAIKnowledgeDocument === undefined) {
             throw new Error('Required parameter createAIKnowledgeDocument was null or undefined when calling createAIKnowledgeDocument.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (id !== undefined && id !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>id, 'id');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -163,6 +170,7 @@ export class AIKnowledgeDocumentBffService {
             {
                 context: localVarHttpContext,
                 body: createAIKnowledgeDocument,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

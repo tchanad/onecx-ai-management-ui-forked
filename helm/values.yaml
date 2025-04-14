@@ -39,6 +39,15 @@ app:
             EXPORT: Export AIKnowledgeVectorDb
             VIEW: View mode for AIKnowledgeVectorDb
             SEARCH: Search AIKnowledgeVectorDb
+          AI_CONTEXT:
+            CREATE: Create AIContext
+            EDIT: Edit AIContext
+            DELETE: Delete AIContext
+            SAVE: Update and save AIContext
+            IMPORT: Import AIContext
+            EXPORT: Export AIContext
+            VIEW: View mode for AIContext
+            SEARCH: Search AIContext
     keycloak:
       client:
         enabled: true

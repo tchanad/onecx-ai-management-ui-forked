@@ -61,6 +61,7 @@ export const commonImports = [CommonModule]
   ],
   providers: [
     providePortalDialogService(),
+    providePortalDialogService(),
     provideHttpClient(withInterceptorsFromDi()),
     { provide: APP_CONFIG, useValue: environment },
     {

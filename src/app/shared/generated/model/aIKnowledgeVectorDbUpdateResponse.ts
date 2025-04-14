@@ -15,6 +15,6 @@ export interface AIKnowledgeVectorDbUpdateResponse {
     description?: string;
     vdb?: string;
     vdbCollection?: string;
-    aiContext?: AIContext;
+    aIContext?: AIContext;
 }
 

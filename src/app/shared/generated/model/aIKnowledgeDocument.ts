@@ -7,6 +7,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { AIKnowledgeDocumentStatusType } from './aIKnowledgeDocumentStatusType';
 
 
 export interface AIKnowledgeDocument { 
@@ -14,13 +15,8 @@ export interface AIKnowledgeDocument {
     id: string;
     name: string;
     documentRefId?: string;
-    status?: AIKnowledgeDocumentStatusEnum;
+    status?: AIKnowledgeDocumentStatusType;
 }
-export enum AIKnowledgeDocumentStatusEnum {
-    New = 'NEW',
-    Processing = 'PROCESSING',
-    Embedded = 'EMBEDDED'
-};
 
 
 

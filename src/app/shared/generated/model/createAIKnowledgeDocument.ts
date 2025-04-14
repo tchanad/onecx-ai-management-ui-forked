@@ -7,10 +7,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { AIKnowledgeDocument } from './aIKnowledgeDocument';
+import { AIKnowledgeDocumentCreateRequest } from './aIKnowledgeDocumentCreateRequest';
 
 
 export interface CreateAIKnowledgeDocument { 
-    aIKnowledgeDocumentData: AIKnowledgeDocument;
+    aIKnowledgeDocumentData: AIKnowledgeDocumentCreateRequest;
 }
 

@@ -10,10 +10,11 @@
 import { AIKnowledgeDocumentStatusType } from './aIKnowledgeDocumentStatusType';
 
 
-export interface AIKnowledgeDocumentUpdateResponse { 
+export interface AIKnowledgeDocumentUpdateRequest { 
     id?: string;
-    name: string;
+    name?: string;
     documentRefId: string;
+    modificationCount: number;
     status?: AIKnowledgeDocumentStatusType;
 }
 

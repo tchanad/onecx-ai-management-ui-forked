@@ -18,7 +18,7 @@ import {
 } from './aiknowledge-document-search.parameters'
 import { selectAIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.selectors'
 import { AIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.viewmodel'
-import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
+import { AIKnowledgeDocumentStatusType } from 'src/app/shared/generated'
 
 @Component({
   selector: 'app-aiknowledge-document-search',
@@ -61,7 +61,7 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
       return actions
     })
   )
-  statusValues = Object.values(AIKnowledgeDocumentStatusEnum)
+  statusValues = Object.values(AIKnowledgeDocumentStatusType)
   diagramColumnId = 'status'
   diagramColumn$ = this.viewModel$.pipe(
     map((vm) => vm.columns.find((e) => e.id === this.diagramColumnId) as DataTableColumn)

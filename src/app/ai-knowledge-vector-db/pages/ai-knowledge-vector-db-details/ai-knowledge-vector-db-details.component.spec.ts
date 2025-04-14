@@ -31,12 +31,12 @@ describe('AIKnowledgeVectorDbDetailsComponent', () => {
   }
 
   window.postMessage = (m: any) => {
-     
+
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => {},
-        stopPropagation: () => {}
+        stopImmediatePropagation: () => { },
+        stopPropagation: () => { }
       })
     )
   }
@@ -66,7 +66,7 @@ describe('AIKnowledgeVectorDbDetailsComponent', () => {
       description: 'Test description',
       vdb: 'Test vdb',
       vdbCollection: 'Test vdb collection',
-      aiContext: {
+      aIContext: {
         appId: 'Test AppID'
       }
     }

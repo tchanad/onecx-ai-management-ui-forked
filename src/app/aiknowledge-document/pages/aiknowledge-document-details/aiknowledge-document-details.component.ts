@@ -4,7 +4,7 @@ import { Action, BreadcrumbService, ObjectDetailItem } from '@onecx/portal-integ
 import { map, Observable } from 'rxjs'
 
 import { ActivatedRoute } from '@angular/router'
-import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
+import { AIKnowledgeDocumentStatusType } from 'src/app/shared/generated'
 import { selectAIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-details.selectors'
 import { AIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-details.viewmodel'
 
@@ -54,13 +54,13 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
     })
   )
 
-  statusValues = Object.values(AIKnowledgeDocumentStatusEnum)
+  statusValues = Object.values(AIKnowledgeDocumentStatusType)
 
   constructor(
     private store: Store,
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.breadcrumbService.setItems([
